@@ -3,8 +3,9 @@ package StringPrograms;
 public class CheckPalindrome {
 
     public static void main(String[] args) {
-        palindromeUsingReverse();
-        palindromeWithoutReverse();
+        //palindromeUsingReverse();
+       // palindromeWithoutReverse();
+        checkReverse();
     }
 
 
@@ -28,7 +29,7 @@ public class CheckPalindrome {
 
         String str = "level";
 
-        Boolean isPalindrome = true;
+        boolean isPalindrome = true;
         for(int i=0; i< str.length()/2; i++){
             if (str.charAt(i) != str.charAt(str.length()-1-i)){
                 isPalindrome = false;
@@ -41,5 +42,19 @@ public class CheckPalindrome {
         } else {
             System.out.println("The string is not a palindrome");
         }
+    }
+
+    public static void checkReverse(){
+
+        String sentence = "I am a Software Tester";
+
+        String[] words = sentence.split(" ");
+
+        StringBuilder result = new StringBuilder();
+            for (int i = sentence.length()-1; i>=0; i--){
+
+                result.append(sentence.charAt(i));
+            }
+        System.out.println(result);
     }
 }
