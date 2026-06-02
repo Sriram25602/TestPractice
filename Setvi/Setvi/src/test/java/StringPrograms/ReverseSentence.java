@@ -19,6 +19,7 @@ public class ReverseSentence {
         ReverseSentence reverse = new ReverseSentence();
         reverse.reverseEachWordSamePosition();
         reverse.reverseWithoutSplit();
+        reverseEachWord();
 
 
     }
@@ -58,6 +59,17 @@ public class ReverseSentence {
         result = word + " " + result;
 
         System.out.println(result.trim());
+    }
+
+    public static void reverseEachWord(){
+        String str = "I am the danger";
+        String[] words = str.split(" ");
+        StringBuilder result = new StringBuilder();
+
+        for (int i=words.length-1; i>=0; i-- ){
+            result.append(words[i] + " ");
+        }
+        System.out.println(result);
     }
 }
 
