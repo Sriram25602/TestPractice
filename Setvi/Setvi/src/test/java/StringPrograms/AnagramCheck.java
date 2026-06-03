@@ -6,6 +6,7 @@ public class AnagramCheck {
 
     public static void main(String[] args) {
         anagramCheckUsingSort();
+        checkAnagramAfterRemovingSpace();
     }
 
     public static void anagramCheckUsingSort(){
@@ -31,4 +32,30 @@ public class AnagramCheck {
         }
 
     }
+
+    // Real interview questions:
+    public static void checkAnagramAfterRemovingSpace(){
+        String one = "Listen";
+        String two = "Sil ent";
+
+        //So, the string may have spaces but still it's anagram. We need to remove the spaces before do anything
+
+        char[] arr1 = one.replaceAll("\\s", "").toLowerCase().toCharArray();
+        char[] arr2 = one.replaceAll("\\s", "").toLowerCase().toCharArray();
+
+        //Then start sorting
+
+        Arrays.sort(arr1);
+        Arrays.sort(arr2);
+
+        if(Arrays.equals(arr1, arr2)){
+            System.out.println("Anagram");
+        } else {
+            System.out.println("Not Anagram");
+        }
+    }
+
+    //MOST Important first rule: We need to check index of both string, if it's not, it should not be anagram
+    // Don't use sorting - Use HashMap
+    //Remove special characters first
 }
