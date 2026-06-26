@@ -107,7 +107,7 @@ public class AnagramCheck {
         s2 = s2.replaceAll("[^a-zA-Z]", "").toLowerCase();
 
         // Check both strings have same length
-        if(s1.length() != s2.length()) return false;~
+        if(s1.length() != s2.length()) return false;
 
         int[] count = new int[26];
 
