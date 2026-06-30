@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class AllPrograms {
 
+
     public static void main(String[] args){
         /* Program 01: Reverse a String O(n) time and Space complexity */
         reverseWord();
@@ -53,6 +54,9 @@ public class AllPrograms {
         }
         System.out.println("-1");
     }
+
+    /* Program 02: Find first unique character in the String
+     *   If there is no any unique character print -1*/
 }
 
 
