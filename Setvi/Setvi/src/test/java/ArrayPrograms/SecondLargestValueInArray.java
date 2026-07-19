@@ -6,7 +6,7 @@ public class SecondLargestValueInArray {
 
         int[] num = {1, 23, 12, 343, 343, 433, 233};
 
-        int max = Integer.MIN_VALUE;
+        int max = Integer.MIN_VALUE;    
         int max2 = Integer.MIN_VALUE;
 
         for(int i=0; i < num.length; i++){
