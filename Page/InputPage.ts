@@ -28,8 +28,7 @@ export class InputPage extends ReusableFunctions{
     }
 
     async buttonCheck(){
-        await this.page.locator('li label:text-is("Button")').click(); 
-        await this.page.locator('h2[text="Button"]').isVisible(); 
+        await this.navigateToTab('Button');
         await this.page.locator('button[id="button-1"]').filter({hasText: 'Submit'}).click(); 
         const textMessage = this.page.locator('p:text-is("Submit button is clicked")'); 
         await expect(textMessage).toBeVisible(); 
@@ -37,8 +36,7 @@ export class InputPage extends ReusableFunctions{
     }
 
     async hyperLink(){
-        await this.page.locator('li label:text-is("Hyperlink")').click(); 
-        await this.page.locator('h2[text="Hyperlink"]').isVisible(); 
+        await this.navigateToTab('Hyperlink');
 
         const [newpage] = await Promise.all([
             this.page.waitForEvent('popup'),
@@ -56,8 +54,7 @@ export class InputPage extends ReusableFunctions{
     }
 
     async dropDownCheck(){
-         await this.page.locator('li label:text-is("Dropdown")').click(); 
-        await this.page.locator('h2[text="Dropdown"]').isVisible(); 
+        await this.navigateToTab('Dropdown');
 
         const countryDD = this.page.locator('[name="countryname"]');
 
@@ -82,8 +79,7 @@ export class InputPage extends ReusableFunctions{
     }
 
     async dragAndDrop(){
-        await this.page.locator('li label:text-is("Drag & Drop")').click(); 
-        await this.page.locator('h2[text="Drag & Drop"]').isVisible(); 
+        await this.navigateToTab('Drag & Drop');
 
         const source = this.page.locator('p:text-is("Java")'); 
         const target = this.page.locator('p:text-is("javac")'); 
@@ -93,8 +89,7 @@ export class InputPage extends ReusableFunctions{
     }
 
     async rightClickCheck(){
-        await this.page.locator('li label:text-is("Context Menu")').click(); 
-        await this.page.locator('h2[text="Context Menu"]').isVisible();  
+        await this.navigateToTab('Context Menu');
 
         // const [dialog] = await Promise.all([
         //     this.page.waitForEvent('dialog'), 
@@ -105,11 +100,26 @@ export class InputPage extends ReusableFunctions{
         // await dialog.accept(); 
 
         this.page.on('dialog', async dialog => {
-            expect(dialog.message()).toBe('You selected a context menu2');
+            expect(dialog.message()).toBe('You selected a context menu');
             await dialog.accept();
         });
         
         await this.page.locator('#hot-spot').click({button: 'right'});
     }
 
+    async doubleClick(){
+
+        await this.page.locator('li label:text-is("Double Click")').click(); 
+
+            const tab = this.page.locator('h2:text-is("Double click")');
+            expect(tab).toBeVisible();
+
+
+        await this.page.locator('p:text-is("Double-click this paragraph to trigger a function.")').click({clickCount: 2}); 
+
+        const expectedText = this.page.locator('div:text-is("Hello World")'); 
+        expect(expectedText).toBeVisible(); 
+    }
+
+    
 }

@@ -14,4 +14,12 @@ export class ReusableFunctions{
       return softAssert ? expect(locator): expect.soft(locator); 
     }
 
+        async navigateToTab(tabName: string){
+            await this.page.locator(`li label:text-is("${tabName}")`).click(); 
+
+            const tab = this.page.locator(`h2:text-is("${tabName}")`);
+            expect(tab).toBeVisible();
+
+        }
+
 }
