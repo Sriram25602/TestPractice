@@ -1,6 +1,7 @@
 import{Page, expect, Locator} from '@playwright/test';
 import { waitForDebugger } from 'node:inspector'; 
 import { ReusableFunctions } from './ReusableFunctions';
+import path from 'path';
 
 
 export class InputPage extends ReusableFunctions{
@@ -14,7 +15,6 @@ export class InputPage extends ReusableFunctions{
         this.page = page;
         this.editableTextBox = page.locator('input[id="editabletext"]').first(); 
         this.inputFieldData = inputFieldData;
-    
     }
 
     async GoToSite(){
@@ -121,5 +121,33 @@ export class InputPage extends ReusableFunctions{
         expect(expectedText).toBeVisible(); 
     }
 
-    
+    async fileUpload(){
+
+        await this.page.locator('li label:text-is("File Upload & Download event")').click(); 
+
+        const filePath = "Fixture/Resources/tv-blue-quotes-glasses-breaking-bad-badass-walter-white-final-1920x1080-abstract-breaking-bad-hd-art-wallpaper-thumb.jpg";
+
+            const tab = this.page.locator('h2:text-is("File Uploader")');
+            expect(tab).toBeVisible();
+
+            await this.page.locator('[id="file-upload"]').setInputFiles(path.join(process.cwd(), filePath)); 
+    }
+
+    async fileDownload(){
+        await this.page.locator('li label:text-is("File Upload & Download event")').click(); 
+        const tab = this.page.locator('h2:text-is("File Uploader")');
+        expect(tab).toBeVisible();
+
+        const filePath = "Fixture/Resources/tv-blue-quotes-glasses-breaking-bad-badass-walter-white-final-1920x1080-abstract-breaking-bad-hd-art-wallpaper-thumb.jpg";
+
+
+        const link1 = this.page.locator('a:text-is("Regression.csv")'); 
+        const link2 = this.page.locator('a:text-is("Lorem Ipsum.pdf")'); 
+
+        const downloadPromise = this.page.waitForEvent('download')
+        await link1.click(); 
+        const download = await downloadPromise; 
+
+        await download.saveAs(filePath + download.suggestedFilename());
+    }
 }

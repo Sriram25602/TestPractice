@@ -68,7 +68,7 @@ export default defineConfig({
 
       use: {
         launchOptions: {
-          channel: 'chrome',
+          //channel: 'chrome',
           args: ['--start-maximized'],
       }
       }

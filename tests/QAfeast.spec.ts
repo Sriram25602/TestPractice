@@ -38,4 +38,13 @@ test('Check double click functionality', async ({inputPage}) => {
   await inputPage.doubleClick();
 });
 
+test('Check File Upload functionality', async({inputPage}) => {
+  await inputPage.fileUpload(); 
+})
+
+test.only('Check File download functionality', async({inputPage}) => {
+  await inputPage.fileDownload(); 
+})
+
+
 });
